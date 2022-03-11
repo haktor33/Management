@@ -5,5 +5,7 @@ namespace Management.Enums
     {
         UserList,
         RegisterConfirm,
+        ChangeStatus,
+        Register,
     }
 }

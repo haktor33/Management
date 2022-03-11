@@ -8,6 +8,7 @@ package greet;
 service Greeter {
   // Sends a greeting
   rpc RegisterConfirmation (RegisterApprovementRequest) returns (DefaultReply);
+  rpc ChangeStatus (ChangeStatusRequest) returns (DefaultReply);
   rpc GetUserList (UserListRequest) returns (DefaultReply);
 }
 
@@ -18,6 +19,11 @@ message DefaultReply {
 message RegisterApprovementRequest {
     int32 UserId = 1;
     bool Approvement = 2;
+}
+
+message ChangeStatusRequest {
+    int32 UserId = 1;
+    bool Active = 2;
 }
 
 message UserListRequest {

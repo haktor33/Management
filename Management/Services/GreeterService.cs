@@ -33,6 +33,23 @@ namespace Management.Services
             });
         }
 
+        public override Task<DefaultReply> ChangeStatus(ChangeStatusRequest request, ServerCallContext context)
+        {
+            var model = new TopicMessageModel
+            {
+                Type = (int)TopicMessageType.ChangeStatus,
+                Data = request
+            };
+            var message = new Message<Null, string> { Value = JsonSerializer.Serialize(model) };
+            var result = SendToKafka(topic, message);
+            Console.WriteLine(result);
+            _logger.LogInformation(result.ToString());
+            return Task.FromResult(new DefaultReply
+            {
+                Message = "Success"
+            });
+        }
+
         public override Task<DefaultReply> GetUserList(UserListRequest request, ServerCallContext context)
         {
             var model = new TopicMessageModel
